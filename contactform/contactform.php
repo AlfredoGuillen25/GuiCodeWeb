@@ -1,23 +1,37 @@
 <?php
-
-if(isset($_POST['enviar'])){
+$result="";
+if(isset($_POST['submit'])){
  if(!empty($_POST['name']) && !empty($_POST['subject']) && !empty($_POST['message']) && !empty($_POST['email']))
-$destino = "halo_fercho1@hotmail.com";
-$name = $_POST['name'];
-$correo = $_POST['email'];
-$asunto = $_POST['subject'];
-$mensaje = $_POST['message'];
-//$header = "From: halo_fercho1@hotmail.com" . "\r\n";
-//$header.= "Reply.To: halo_fercho1@hotmail.com" . "\r\n";
-//$header.= "X-Mailer: PHP/" . phpversion();
-$mail = @mail($destino,$correo,$name,$asunto,$mensaje);
-//header("Location: https://www.facebook.com/pages/category/Software-Company/GuiCode-107393933974022/");
-if($correo){
-    echo"<h4>Enviado</h4>";
-}else{
-    echo "<h4>Intente mas tarde</h4>";
-}
-}
+require 'phpmailer/PHPMailerAutoload.php'
+$mail = new phpmailer;
+$mail->Host='smtp.gmail.com';
+$mail->Port=587;
+$mail->SMTPAuth=true;
+$mail->SMTPSecure='tls';
+$mail->Username='guicodecodigo@gmail.com';
+$mail->Password='guicode157';
 
+$mail->setFrom($_POST['email'],
+ $_POST['name'],
+ $_POST['subject'],
+ $_POST['message']);
+
+ $mail->addAddress('galindoperezfernando@gmail.com');
+ $mail->addReplyTo($_POST['email'],$_POST['name']);
+ 
+ $mail->isHTML(true);
+ $mail->Subjet='Enviado por '.$_POST['name'];
+
+ $mail->Body='<h1 align=center>name: '.$_POST['name'] .'<br>email: '.$_POST['email'].'<br>subject: '.$_POST['subject']
+ .'<br>message: '.$_POST['message'].'</h1>';
+
+$mail = @mail($destino,$correo,$name,$asunto,$mensaje);
+
+if($mail->send){
+ $result="Algo esta mal.intentelo de nuevo por favor";
+}else{
+  $result="Gracias" .$_POST['name']."por contactarnos espera respuesta muy pronto!!";
+}
+}
 ?>
 
