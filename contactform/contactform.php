@@ -25,13 +25,13 @@ $mail->setFrom($_POST['email'],
  $mail->Body='<h1 align=center>name: '.$_POST['name'] .'<br>email: '.$_POST['email'].'<br>subject: '.$_POST['subject']
  .'<br>message: '.$_POST['message'].'</h1>';
 
-$mail = @mail($destino,$correo,$name,$asunto,$mensaje);
+//$mail = @mail($destino,$correo,$name,$asunto,$mensaje);
 
 if($mail->send){
- $result="Algo esta mal.intentelo de nuevo por favor";
-}else{
-  $result="Gracias" .$_POST['name']."por contactarnos espera respuesta muy pronto!!";
+        $result="OK";
+    }
 }
-}
+
+echo $result;
 ?>
 
