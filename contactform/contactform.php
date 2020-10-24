@@ -1,7 +1,9 @@
 <?php
 $result="";
+date_default_timezone_set('Etc/UTC');
+require '../PHPMailerAutoload.php';
 if(isset($_POST['submit'])){
-if(!empty($_POST['name']) && !empty($_POST['subject']) && !empty($_POST['message']) && !empty($_POST['email']))
+//if(!empty($_POST['name']) && !empty($_POST['subject']) && !empty($_POST['msg']) && !empty($_POST['email']))
 require 'phpmailer/PHPMailerAutoload.php'
 $mail = new PHPMailer;
 $mail = ->isSMTP();
@@ -19,7 +21,7 @@ $mail->addReplyTo($_POST['email'],$_POST['name']);
  $mail->isHTML(true);
  $mail->Subject='Enviado por '.$_POST['name'];
  $mail->Body='<h1 align=center>name: '.$_POST['name'] .'<br>email: '.$_POST['email'].'<br>subject: '.$_POST['subject']
- .'<br>message: '.$_POST['message'].'</h1>';
+ .'<br>message: '.$_POST['msg'].'</h1>';
 
 //$mail = @mail($destino,$correo,$name,$asunto,$mensaje);
 
@@ -30,4 +32,8 @@ if(!$mail->send){
 
 echo $result;
 ?>
+
+
+
+
 

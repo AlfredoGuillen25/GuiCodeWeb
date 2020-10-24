@@ -107,7 +107,7 @@ jQuery(document).ready(function($) {
           $("#sendmessage").removeClass("show");
           $("#errormessage").addClass("show");
           $('#errormessage').html("");
-          $('#errormessage').html("Error al enviar, intente más tarde");
+          $('#errormessage').html("Error al enviar");
         }
 
       }
