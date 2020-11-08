@@ -109,7 +109,6 @@ jQuery(document).ready(function($) {
           $('#errormessage').html("");
           $('#errormessage').html("Error al enviar");
         }
-
       }
     });
     return false;
